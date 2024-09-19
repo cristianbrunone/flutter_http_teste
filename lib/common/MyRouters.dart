@@ -2,11 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_http/screens/comments_page.dart';
 import 'package:flutter_http/screens/consulta_cep.dart';
 import 'package:flutter_http/screens/posts_page.dart';
 
 const String ROUTE_TESTE = '/teste';
 const String ROUTE_POST = '/post';
+const String ROUTE_COMMENT = '/comment';
 
 class MyRouters {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -15,6 +17,13 @@ class MyRouters {
         return _buildPageRoute(ConsultaCepPage(), settings);
       case ROUTE_POST:
         return _buildPageRoute(PostsPage(), settings);
+      case ROUTE_COMMENT:
+        final int postId = settings.arguments as int; //obtener el post id aqui
+        return _buildPageRoute(
+            CommentsPage(
+              postId: postId,
+            ),
+            settings);
       default:
         return _buildPageRoute(PostsPage(), settings);
     }
